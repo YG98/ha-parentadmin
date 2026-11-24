@@ -1,0 +1,20 @@
+{
+  "domain": "parentadmin",
+  "name": "ParentAdmin Nursery Diary",
+  "codeowners": [
+    "@YG98"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "frontend",
+    "http"
+  ],
+  "documentation": "https://github.com/YG98/ha-parentadmin",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/YG98/ha-parentadmin/issues",
+  "requirements": [
+    "beautifulsoup4>=4.12"
+  ],
+  "version": "0.2.0"
+}

@@ -1,0 +1,30 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "ParentAdmin login",
+        "description": "Use the same email and password you use on uk.parentadmin.com.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-enter ParentAdmin password",
+        "description": "The login for {email} stopped working. Enter the current password.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Email or password was not accepted.",
+      "cannot_connect": "Could not reach ParentAdmin.",
+      "unknown": "Unexpected error, check the logs."
+    },
+    "abort": {
+      "already_configured": "This ParentAdmin account is already set up.",
+      "reauth_successful": "Password updated."
+    }
+  }
+}
