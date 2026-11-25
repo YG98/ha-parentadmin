@@ -7,7 +7,7 @@
  * photo_columns: 1                           (optional, default 1 = full width like the website)
  * show_header: true                          (optional)
  */
-const CARD_VERSION = "0.2.0";
+const CARD_VERSION = "0.3.0";
 
 const TYPES = {
   "check-in": { color: "#4FB269", icon: "mdi:door-open" },
@@ -34,7 +34,10 @@ function fmtDate(iso) {
   const d = new Date(`${iso}T12:00:00`);
   const today = new Date();
   if (d.toDateString() === today.toDateString()) return "Today";
-  return d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  if (d.toDateString() === yesterday.toDateString()) return "Yesterday";
+  return d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" });
 }
 
 function ring(pct, color) {
@@ -137,7 +140,8 @@ class ParentAdminTimelineCard extends HTMLElement {
       if (cfg.order === "desc") entries.reverse();
       if (title === undefined) title = a.child ? `${a.child.split(" ")[0]}'s diary` : "Nursery diary";
       date = fmtDate(a.date);
-      body = entries.length ? entries.map((e) => this._row(e)).join("") : `<div class="empty">No diary entries yet today.</div>`;
+      const emptyText = a.booked_today === false ? "No nursery today." : "No diary entries yet today.";
+      body = entries.length ? entries.map((e) => this._row(e)).join("") : `<div class="empty">${emptyText}</div>`;
     }
 
     const header = cfg.show_header
