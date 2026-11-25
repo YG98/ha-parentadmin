@@ -20,7 +20,7 @@ async def async_setup_entry(
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up the image entity."""
-    async_add_entities([ParentAdminLatestPhoto(entry.runtime_data)])
+    async_add_entities([ParentAdminLatestPhoto(entry.runtime_data.diary)])
 
 
 class ParentAdminLatestPhoto(ParentAdminEntity, ImageEntity):
@@ -30,7 +30,7 @@ class ParentAdminLatestPhoto(ParentAdminEntity, ImageEntity):
     _attr_content_type = "image/jpeg"
 
     def __init__(self, coordinator: ParentAdminCoordinator) -> None:
-        ParentAdminEntity.__init__(self, coordinator, "latest_photo")
+        ParentAdminEntity.__init__(self, coordinator, "latest_photo", coordinator.data.child_name)
         ImageEntity.__init__(self, coordinator.hass)
         self._url: str | None = None
         self._cached: bytes | None = None

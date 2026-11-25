@@ -24,7 +24,7 @@ class ParentAdminPhotoView(HomeAssistantView):
         if entry is None or entry.domain != DOMAIN or entry.state is not ConfigEntryState.LOADED:
             raise web.HTTPNotFound
         try:
-            body, content_type = await entry.runtime_data.async_get_photo_by_key(key)
+            body, content_type = await entry.runtime_data.diary.async_get_photo_by_key(key)
         except KeyError:
             raise web.HTTPNotFound from None
         except ParentAdminError as err:
